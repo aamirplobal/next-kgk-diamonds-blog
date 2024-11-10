@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "Post" (
+CREATE TABLE "BlogPost" (
     "id" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -8,5 +8,5 @@ CREATE TABLE "Post" (
     "content" TEXT,
     "imageUrl" VARCHAR(255),
 
-    CONSTRAINT "Post_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "BlogPost_pkey" PRIMARY KEY ("id")
 );

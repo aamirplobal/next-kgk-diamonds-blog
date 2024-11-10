@@ -14,7 +14,7 @@ datasource db {
 }
 
 
-model Post {
+model BlogPost {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
