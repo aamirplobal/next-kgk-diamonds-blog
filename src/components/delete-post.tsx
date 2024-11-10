@@ -1,10 +1,8 @@
-"use client";
+"use client"; // Ensure this component is treated as a client-side component
+
 import { Trash2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 const DeletePost = ({ id }: { id: number }) => {
-  const router = useRouter(); // Initialize router at the top level
-
   const handleDelete = async (id: number) => {
     if (!process.env.NEXT_PUBLIC_BACKEND_URL) {
       console.error("Backend URL is not defined.");
@@ -21,7 +19,7 @@ const DeletePost = ({ id }: { id: number }) => {
 
       if (response.ok) {
         console.log(`Post ${id} deleted successfully`);
-        router.push("/"); // Redirect to the home page
+        window.location.href = "/"; // Redirect to home page using window.location
       } else {
         console.error("Failed to delete post");
       }
