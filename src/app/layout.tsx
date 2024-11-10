@@ -13,6 +13,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { AddDialog } from "@/components/dialog-add";
 
 export const metadata: Metadata = {
   title: "CMS with WYSIWYG",
@@ -37,10 +38,13 @@ export default function RootLayout({
               <Breadcrumb>
                 <BreadcrumbList>
                   <BreadcrumbItem>
-                    <BreadcrumbPage>October 2024</BreadcrumbPage>
+                    <BreadcrumbPage>WYSIWYG (CMS)</BreadcrumbPage>
                   </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>
+              <div className="flex items-center gap-2 text-sm ml-auto">
+                <AddDialog />
+              </div>
             </header>
             <div className="flex flex-1 flex-col gap-4 p-4">
               <div>{children}</div>
