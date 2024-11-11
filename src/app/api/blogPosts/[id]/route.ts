@@ -73,11 +73,12 @@ export async function DELETE(
   }
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
     const plugin = new PhysicsContentPlugin(process.env.AI_API_KEY as string);
     const { title, content } = await plugin.getContent();
-
+    const body = await req.json();
+    console.log(body);
     return NextResponse.json({ title, content }, { status: 200 });
   } catch (error) {
     console.error("Error deleting post:", error);
