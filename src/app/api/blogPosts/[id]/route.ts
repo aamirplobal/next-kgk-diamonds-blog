@@ -73,7 +73,7 @@ export async function DELETE(
   }
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const plugin = new PhysicsContentPlugin(process.env.AI_API_KEY as string);
     const { title, content } = await plugin.getContent();
