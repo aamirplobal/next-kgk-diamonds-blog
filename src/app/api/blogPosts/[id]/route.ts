@@ -3,12 +3,12 @@ import prisma from "../../../../../prisma/db_client";
 
 export async function PUT(
   req: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const id = (await params).id;
     const body = await req.json();
     const { title, content, published, imageUrl } = body;
-    const { id } = await context.params; // Ensure params is awaited here
 
     const postId = parseInt(id, 10);
     if (isNaN(postId)) {
@@ -37,10 +37,11 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await context.params; // Ensure params is awaited here
+    const id = (await params).id;
+
     const postId = parseInt(id, 10);
     if (isNaN(postId)) {
       return NextResponse.json({ error: "Invalid ID format" }, { status: 400 });

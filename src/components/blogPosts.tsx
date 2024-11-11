@@ -22,10 +22,10 @@ export default async function BlogPost() {
     console.error("Backend URL is not defined.");
     return;
   }
-  let data = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/blogPosts`, {
+  const data = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/blogPosts`, {
     cache: "no-store",
   });
-  let posts: BlogPost[] = await data.json();
+  const posts: BlogPost[] = await data.json();
 
   return (
     <>

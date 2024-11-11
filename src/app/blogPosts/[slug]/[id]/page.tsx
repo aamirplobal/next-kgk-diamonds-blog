@@ -1,7 +1,10 @@
 import React from "react";
 
-const Post = ({ params }: { params: { id: string } }) => {
-  return <div>Id: {params.id}</div>;
-};
-
-export default Post;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
+  return <div>My Post: {id}</div>;
+}
