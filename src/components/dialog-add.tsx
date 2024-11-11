@@ -79,6 +79,30 @@ function ProfileForm({ className }: React.ComponentProps<"form">) {
     }
   };
 
+  const handleAIPostGen = async (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent default behavior for the button
+
+    if (!process.env.NEXT_PUBLIC_BACKEND_URL) {
+      console.error("Backend URL is not defined.");
+      return;
+    }
+
+    try {
+      const data = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/blogPosts/1`,
+        {
+          cache: "no-store",
+        }
+      );
+      const aipost: { title: string; content: string } = await data.json();
+
+      setContent(aipost?.content);
+      setTitle(aipost?.title);
+    } catch (error) {
+      console.error("Error generating AI post:", error);
+    }
+  };
+
   return (
     <form
       onSubmit={handleAddPost}
@@ -111,6 +135,9 @@ function ProfileForm({ className }: React.ComponentProps<"form">) {
         />
       </div>
       <Button type="submit">Add Post</Button>
+      <Button type="button" variant="outline" onClick={handleAIPostGen}>
+        Generate Auto Post
+      </Button>
     </form>
   );
 }
