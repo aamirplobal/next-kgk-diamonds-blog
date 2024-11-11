@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../../prisma/db_client";
+import PhysicsContentPlugin from "ai-content-plugin";
 
 export async function PUT(
   req: NextRequest,
@@ -63,6 +64,21 @@ export async function DELETE(
       { message: "Deleted successfully" },
       { status: 200 }
     );
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    return NextResponse.json(
+      { error: "Failed to delete post" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET(req: NextRequest) {
+  try {
+    const plugin = new PhysicsContentPlugin(process.env.AI_API_KEY as string);
+    const { title, content } = await plugin.getContent();
+
+    return NextResponse.json({ title, content }, { status: 200 });
   } catch (error) {
     console.error("Error deleting post:", error);
     return NextResponse.json(
